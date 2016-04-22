@@ -11,7 +11,7 @@ describe('Class Car', () => {
         garage = new Garage(200);
     });
 
-    describe('.park: ', () => {
+    describe('#park()', () => {
 
         it('if have parking lot then one car into garage can park and should return success', () => {
             let result = car.park(garage);
@@ -31,7 +31,7 @@ describe('Class Car', () => {
         });
     });
 
-    describe('.leave: ', () => {
+    describe('#leave()', () => {
 
         it('one car leave garage should return success if the car already in garage', () => {
             car.park(garage);

@@ -13,7 +13,7 @@ export default class Garage {
     findCar(car) {
         let parkedCars = this.parkedCars;
         for (let carNumber in parkedCars) {
-            if(parkedCars[carNumber].number === car.number) {
+            if (parkedCars[carNumber].number === car.number) {
                 return true;
             }
         }

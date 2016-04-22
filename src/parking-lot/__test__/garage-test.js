@@ -11,7 +11,7 @@ describe('Class Garage', () => {
         garage = new Garage(200);
     });
 
-    describe('.isAvailable: ', () => {
+    describe('#isAvailable()', () => {
 
         it('the garage can accommodate 200 and occupied 100 , isAvailable should return true', () => {
             garage.occupied = 100;
@@ -26,7 +26,7 @@ describe('Class Garage', () => {
         });
     });
 
-    describe('.findCar: ', () => {
+    describe('#findCar()', () => {
 
         it('if one car already in garage ,findCar should return true', () => {
             car.park(garage);
