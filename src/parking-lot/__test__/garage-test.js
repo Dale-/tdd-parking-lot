@@ -31,7 +31,7 @@ describe('Class Garage', () => {
         it('if one car already in garage ,findCar should return true', () => {
             car.park(garage);
             let result = garage.findCar(car);
-            expect(result).toEqual(true);
+            expect(result.number).toEqual(car.number);
         });
 
         it('if one car not in garage ,findCar should return false', () => {

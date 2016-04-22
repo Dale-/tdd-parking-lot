@@ -14,7 +14,7 @@ export default class Garage {
         let parkedCars = this.parkedCars;
         for (let carNumber in parkedCars) {
             if (parkedCars[carNumber].number === car.number) {
-                return true;
+                return parkedCars[carNumber];
             }
         }
         return false;
