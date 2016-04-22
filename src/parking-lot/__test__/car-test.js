@@ -1,4 +1,3 @@
-
 import Car from '../car';
 import Garage from '../garage';
 
@@ -25,11 +24,11 @@ describe('Class Car', () => {
             expect(result).toEqual('fail');
         });
 
-        //it('one car into garage can park and should return fail if this car has parked', () => {
-        //    garage.occupied = 200;
-        //    let result = car.park(garage);
-        //    expect(result).toEqual('fail');
-        //});
+        it('one car into garage can park and should return fail if this car has parked', () => {
+            car.parked = true;
+            let result = car.park(garage);
+            expect(result).toEqual('fail');
+        });
     });
 });
 
