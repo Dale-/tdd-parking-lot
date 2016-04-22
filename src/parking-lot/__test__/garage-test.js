@@ -11,12 +11,18 @@ describe('Class Garage', () => {
         garage = new Garage(200);
     });
 
-    describe('.getAvailable: ', () => {
+    describe('.isAvailable: ', () => {
 
-        it('the garage can accommodate 200 and occupied 100 , getAvailable should return 100', () => {
+        it('the garage can accommodate 200 and occupied 100 , isAvailable should return true', () => {
             garage.occupied = 100;
-            let result = garage.getAvailable();
-            expect(result).toEqual(100);
+            let result = garage.isAvailable();
+            expect(result).toEqual(true);
+        });
+
+        it('the garage can accommodate 200 and occupied 200 , isAvailable should return false', () => {
+            garage.occupied = 200;
+            let result = garage.isAvailable();
+            expect(result).toEqual(false);
         });
     });
 

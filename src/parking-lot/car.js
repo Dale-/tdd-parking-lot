@@ -6,7 +6,7 @@ export default class Car {
     }
 
     park(garage) {
-        if (!!garage.getAvailable() && !this.parked) {
+        if (garage.isAvailable() && !this.parked) {
             this.parked = true;
             garage.parkedCars.push(this);
             return 'success';

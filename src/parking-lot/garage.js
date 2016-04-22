@@ -6,8 +6,8 @@ export default class Garage {
         this.parkedCars = [];
     }
 
-    getAvailable() {
-        return this.capacity - this.occupied;
+    isAvailable() {
+        return !!(this.capacity - this.occupied);
     }
 
     findCar(car) {
