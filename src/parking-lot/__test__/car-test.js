@@ -34,8 +34,14 @@ describe('Class Car', () => {
     describe('.leave: ', () => {
 
         it('one car leave garage should return success if the car already in garage', () => {
+            car.park(garage);
             let result = car.leave(garage);
             expect(result).toEqual('success');
+        });
+
+        it('one car leave garage should return success if the car not in garage', () => {
+            let result = car.leave(garage);
+            expect(result).toEqual('fail');
         });
     });
 });

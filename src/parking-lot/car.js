@@ -6,8 +6,9 @@ export default class Car {
     }
 
     park(garage) {
-        if(!!garage.getAvailable() && !this.parked) {
+        if (!!garage.getAvailable() && !this.parked) {
             this.parked = true;
+            garage.parkedCars.push(this);
             return 'success';
         } else {
             return 'fail';
@@ -15,7 +16,7 @@ export default class Car {
     }
 
     leave(garage) {
-        return 'success';
+        return garage.findCar(this) ? 'success' : 'fail';
     }
 
 }
