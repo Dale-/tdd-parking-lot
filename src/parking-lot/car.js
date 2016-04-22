@@ -14,5 +14,9 @@ export default class Car {
         }
     }
 
+    leave(garage) {
+        return 'success';
+    }
+
 }
 
