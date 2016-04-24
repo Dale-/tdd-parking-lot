@@ -16,11 +16,11 @@ describe('Class Parking Lot', () => {
         parkingBoy = new ParkingBoy([parkingLotOne, parkingLotTwo]);
     });
 
-    describe('One car want to park into parking lot', () => {
+    describe('Park:', () => {
 
-        describe('One car can park into parking lot', () => {
+        describe('Can Park', () => {
 
-            describe('Just one parking lot have parking spaces', () => {
+            describe('Only one parking lot can available:', () => {
 
                 it('when the capacity is 10 and occupied is 10 for parking lot one ,' +
                     'the capacity is 10 and occupied is 9 for parking lot two, ' +
@@ -29,8 +29,7 @@ describe('Class Parking Lot', () => {
                     parkingLotOne.occupied = 10;
                     parkingLotTwo.occupied = 9;
 
-                    let parkingLot = parkingBoy.findParkingSpace();
-                    parkingBoy.park(car, parkingLot);
+                    parkingBoy.park(car);
 
                     expect(parkingLotTwo.occupied).toEqual(10);
                     expect(ParkingBoy.findCarByParkingLot(car, parkingLotTwo)).toBeTruthy();
@@ -44,6 +43,7 @@ describe('Class Parking Lot', () => {
                     parkingLotOne.occupied = 10;
                     parkingLotTwo.occupied = 10;
                     parkingBoy.leave(car, parkingLotTwo);
+
                     parkingBoy.park(car);
 
                     expect(parkingLotTwo.occupied).toEqual(10);
@@ -58,6 +58,7 @@ describe('Class Parking Lot', () => {
                     parkingLotOne.occupied = 9;
                     parkingLotTwo.occupied = 9;
                     parkingLotTwo.addCar(car);
+
                     parkingBoy.park(car);
 
                     expect(parkingLotOne.occupied).toEqual(10);
@@ -73,10 +74,70 @@ describe('Class Parking Lot', () => {
                     parkingLotOne.removeCar(car);
                     parkingLotTwo.occupied = 9;
                     parkingLotTwo.addCar(car);
+
                     parkingBoy.park(car);
 
                     expect(parkingLotOne.occupied).toEqual(10);
                     expect(ParkingBoy.findCarByParkingLot(car, parkingLotOne)).toBeTruthy();
+                });
+            });
+
+            describe('More than one parking lot can available:', () => {
+
+                it('when the capacity is 10 and occupied is 9 for parking lot one ,' +
+                    'the capacity is 10 and occupied is 9 for parking lot two, ' +
+                    'then one car will park in parking lot one', () => {
+
+                    parkingLotOne.occupied = 9;
+                    parkingLotTwo.occupied = 9;
+
+                    parkingBoy.park(car);
+
+                    expect(parkingLotOne.occupied).toEqual(10);
+                    expect(ParkingBoy.findCarByParkingLot(car, parkingLotOne)).toBeTruthy();
+                });
+
+                it('when the capacity is 10, occupied is 10 and leave one for parking lot one ,' +
+                    'the capacity is 10 and occupied is 9 for parking lot two, ' +
+                    'then one car will park in parking lot one', () => {
+
+                    parkingLotOne.occupied = 10;
+                    parkingLotOne.removeCar(car);
+                    parkingLotTwo.occupied = 9;
+
+                    parkingBoy.park(car);
+
+                    expect(parkingLotOne.occupied).toEqual(10);
+                    expect(ParkingBoy.findCarByParkingLot(car, parkingLotOne)).toBeTruthy();
+                });
+
+                it('when the capacity is 10, occupied is 8 and park one for parking lot one ,' +
+                    'the capacity is 10 and occupied is 9 for parking lot two, ' +
+                    'then one car will park in parking lot one', () => {
+
+                    parkingLotOne.occupied = 8;
+                    parkingLotOne.addCar(car);
+                    parkingLotTwo.occupied = 9;
+                    car.number = '0002';
+                    parkingBoy.park(car);
+
+                    expect(parkingLotOne.occupied).toEqual(10);
+                    expect(parkingLotOne.findCar(car).number).toEqual('0002');
+                });
+
+                it('when the capacity is 10, occupied is 8 and park one for parking lot one ,' +
+                    'the capacity is 10, occupied is 10 and leave one for parking lot two, ' +
+                    'then one car will park in parking lot one', () => {
+
+                    parkingLotOne.occupied = 8;
+                    parkingLotOne.addCar(car);
+                    parkingLotTwo.occupied = 10;
+                    parkingLotOne.removeCar(car);
+
+                    parkingBoy.park(car);
+
+                    expect(parkingLotOne.occupied).toEqual(9);
+                    expect(parkingLotOne.findCar(car).number).toEqual('DEV326');
                 });
             });
         });
