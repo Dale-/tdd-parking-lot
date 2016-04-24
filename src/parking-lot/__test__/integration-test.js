@@ -36,6 +36,22 @@ describe('Class Parking Lot', () => {
                     expect(ParkingBoy.findCarByParkingLot(car, parkingLotTwo)).toBeTruthy();
 
                 });
+
+                it('when the capacity is 10 and occupied is 10 for parking lot one ,' +
+                    'the capacity is 10, occupied is 10 and leave one car for parking lot two, ' +
+                    'one car can park in parking lot two', () => {
+
+                    parkingLotOne.occupied = 10;
+                    parkingLotTwo.occupied = 10;
+                    parkingBoy.leave(car, parkingLotTwo);
+
+                    let parkingLot = parkingBoy.findParkingSpace();
+                    parkingBoy.park(car, parkingLot);
+
+                    expect(parkingLotTwo.occupied).toEqual(10);
+                    expect(ParkingBoy.findCarByParkingLot(car, parkingLotTwo)).toBeTruthy();
+
+                });
             });
         });
     });

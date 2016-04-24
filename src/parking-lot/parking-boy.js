@@ -19,16 +19,15 @@ export default class ParkingBoy {
     park(car) {
         let parkingLot = this.findParkingSpace();
         if (parkingLot) {
-            ParkingBoy.parkToParkingLot(car, parkingLot);
+            parkingLot.addCar(car);
             return 'success';
         }
         return 'false';
     }
 
-    static parkToParkingLot(car, parkingLot) {
-        car.parked = true;
-        parkingLot.parkedCars.push(car);
-        parkingLot.occupied++;
+    leave(car, parkingLot) {
+        parkingLot.removeCar(car);
+        return 'success';
     }
 
     static findCarByParkingLot(car, parkingLot) {

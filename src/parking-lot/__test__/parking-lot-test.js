@@ -26,6 +26,27 @@ describe('Class Parking Lot', () => {
         });
     });
 
+    describe('#addCar()', () => {
+
+        it('when the car want to park in parking lot, we should add the car in parking lot', () => {
+            parkingLot.addCar(car);
+            expect(car.parked).toBeTruthy();
+            expect(parkingLot.parkedCars.length).toEqual(1);
+            expect(parkingLot.occupied).toEqual(1);
+        });
+    });
+
+    describe('#removeCar()', () => {
+
+        it('when the car leave the parking lot , the occupied should reduce one and the parkedCars should reduce', () => {
+            parkingLot.addCar(car);
+            parkingLot.removeCar(car);
+            expect(car.parked).toBeFalsy();
+            expect(parkingLot.parkedCars.length).toEqual(0);
+            expect(parkingLot.occupied).toEqual(0);
+        });
+    });
+
     describe('#findCar()', () => {
 
         it('if one car already in parking lot ,findCar should return true', () => {

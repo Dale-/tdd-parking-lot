@@ -31,19 +31,29 @@ describe('Class ParkingBoy', () => {
         });
     });
 
-    describe('.parkToParkingLot()', () => {
-
-        it('when the car park in parking lot one , we should find the car in parking lot one', () => {
-            ParkingBoy.parkToParkingLot(car, parkingLotOne);
-            expect(ParkingBoy.findCarByParkingLot(car, parkingLotOne)).toBeTruthy();
-        });
-    });
+    //describe('.parkToParkingLot()', () => {
+    //
+    //    it('when the car park in parking lot one , we should find the car in parking lot one', () => {
+    //        ParkingBoy.parkToParkingLot(car, parkingLotOne);
+    //        expect(ParkingBoy.findCarByParkingLot(car, parkingLotOne)).toBeTruthy();
+    //    });
+    //});
 
     describe('#park()', () => {
 
         it('when the car park in parking lot one , we should find the car in parking lot one', () => {
             var result = parkingBoy.park(car, parkingLotOne);
             expect(result).toEqual('success');
+        });
+    });
+
+    describe('#leave()', () => {
+
+        it('when the car park already in parking lot one , we can leave from the parking lot one', () => {
+            parkingBoy.park(car, parkingLotOne);
+            var result = parkingBoy.leave(car, parkingLotOne);
+            expect(result).toEqual('success');
+            expect(parkingLotOne.findCar(car)).toBeFalsy();
         });
     });
 });
