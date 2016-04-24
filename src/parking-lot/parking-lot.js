@@ -1,9 +1,10 @@
-export default class Garage {
+export default class ParkingLot {
 
-    constructor(capacity) {
+    constructor(capacity, number, parkedCars) {
+        this.number = number;
         this.capacity = capacity;
         this.occupied = 0;
-        this.parkedCars = [];
+        this.parkedCars = parkedCars || [];
     }
 
     isAvailable() {
