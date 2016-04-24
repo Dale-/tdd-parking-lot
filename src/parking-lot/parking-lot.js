@@ -33,14 +33,14 @@ export default class ParkingLot {
 
 
     removeCar(car) {
-        this.parkedCars.splice(this.findCarIndex(car),1);
-        this.occupied --;
+        this.parkedCars.splice(this.findCarIndex(car), 1);
+        this.occupied--;
         car.parked = false;
     }
 
     addCar(car) {
         this.parkedCars.push(car);
-        this.occupied ++;
+        this.occupied++;
         car.parked = true;
     }
 

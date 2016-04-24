@@ -31,14 +31,6 @@ describe('Class ParkingBoy', () => {
         });
     });
 
-    //describe('.parkToParkingLot()', () => {
-    //
-    //    it('when the car park in parking lot one , we should find the car in parking lot one', () => {
-    //        ParkingBoy.parkToParkingLot(car, parkingLotOne);
-    //        expect(ParkingBoy.findCarByParkingLot(car, parkingLotOne)).toBeTruthy();
-    //    });
-    //});
-
     describe('#park()', () => {
 
         it('when the car park in parking lot one , we should find the car in parking lot one', () => {
