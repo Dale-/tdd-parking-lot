@@ -17,9 +17,7 @@ describe('Class Parking Lot', () => {
     });
 
     describe('Park:', () => {
-
         describe('Can Park', () => {
-
             describe('Only one parking lot can available:', () => {
 
                 it('when the capacity is 10 and occupied is 10 for parking lot one ,' +
@@ -29,8 +27,9 @@ describe('Class Parking Lot', () => {
                     parkingLotOne.occupied = 10;
                     parkingLotTwo.occupied = 9;
 
-                    parkingBoy.park(car);
+                    let result = parkingBoy.park(car);
 
+                    expect(result).toEqual('success');
                     expect(parkingLotTwo.occupied).toEqual(10);
                     expect(ParkingBoy.findCarByParkingLot(car, parkingLotTwo)).toBeTruthy();
 
@@ -41,11 +40,13 @@ describe('Class Parking Lot', () => {
                     'one car can park in parking lot two', () => {
 
                     parkingLotOne.occupied = 10;
-                    parkingLotTwo.occupied = 10;
+                    parkingLotTwo.occupied = 9;
+                    parkingBoy.park(car);
                     parkingBoy.leave(car, parkingLotTwo);
 
-                    parkingBoy.park(car);
+                    let result = parkingBoy.park(car);
 
+                    expect(result).toEqual('success');
                     expect(parkingLotTwo.occupied).toEqual(10);
                     expect(ParkingBoy.findCarByParkingLot(car, parkingLotTwo)).toBeTruthy();
 
@@ -59,8 +60,9 @@ describe('Class Parking Lot', () => {
                     parkingLotTwo.occupied = 9;
                     parkingLotTwo.addCar(car);
 
-                    parkingBoy.park(car);
+                    let result = parkingBoy.park(car);
 
+                    expect(result).toEqual('success');
                     expect(parkingLotOne.occupied).toEqual(10);
                     expect(ParkingBoy.findCarByParkingLot(car, parkingLotOne)).toBeTruthy();
 
@@ -75,8 +77,9 @@ describe('Class Parking Lot', () => {
                     parkingLotTwo.occupied = 9;
                     parkingLotTwo.addCar(car);
 
-                    parkingBoy.park(car);
+                    let result = parkingBoy.park(car);
 
+                    expect(result).toEqual('success');
                     expect(parkingLotOne.occupied).toEqual(10);
                     expect(ParkingBoy.findCarByParkingLot(car, parkingLotOne)).toBeTruthy();
                 });
@@ -91,8 +94,9 @@ describe('Class Parking Lot', () => {
                     parkingLotOne.occupied = 9;
                     parkingLotTwo.occupied = 9;
 
-                    parkingBoy.park(car);
+                    let result = parkingBoy.park(car);
 
+                    expect(result).toEqual('success');
                     expect(parkingLotOne.occupied).toEqual(10);
                     expect(ParkingBoy.findCarByParkingLot(car, parkingLotOne)).toBeTruthy();
                 });
@@ -105,8 +109,9 @@ describe('Class Parking Lot', () => {
                     parkingLotOne.removeCar(car);
                     parkingLotTwo.occupied = 9;
 
-                    parkingBoy.park(car);
+                    let result = parkingBoy.park(car);
 
+                    expect(result).toEqual('success');
                     expect(parkingLotOne.occupied).toEqual(10);
                     expect(ParkingBoy.findCarByParkingLot(car, parkingLotOne)).toBeTruthy();
                 });
@@ -119,8 +124,9 @@ describe('Class Parking Lot', () => {
                     parkingLotOne.addCar(car);
                     parkingLotTwo.occupied = 9;
                     car.number = '0002';
-                    parkingBoy.park(car);
+                    let result = parkingBoy.park(car);
 
+                    expect(result).toEqual('success');
                     expect(parkingLotOne.occupied).toEqual(10);
                     expect(parkingLotOne.findCar(car).number).toEqual('0002');
                 });
@@ -134,11 +140,74 @@ describe('Class Parking Lot', () => {
                     parkingLotTwo.occupied = 10;
                     parkingLotOne.removeCar(car);
 
-                    parkingBoy.park(car);
+                    let result = parkingBoy.park(car);
 
+                    expect(result).toEqual('success');
                     expect(parkingLotOne.occupied).toEqual(9);
                     expect(parkingLotOne.findCar(car).number).toEqual('DEV326');
                 });
+            });
+        });
+
+        describe('Can not Park', () => {
+
+            describe('No parking lot in all parking lot:', () => {
+
+                it('All parking lot is full, then no one car can park', () => {
+
+                    parkingLotOne.occupied = 10;
+                    parkingLotTwo.occupied = 10;
+
+                    let result = parkingBoy.park(car);
+
+                    expect(result).toEqual('fail');
+                });
+
+                it('when the capacity is 10, occupied is 10 for parking lot one ,' +
+                    'the capacity is 10, occupied is 9 and park one for parking lot two, ' +
+                    'then one car will park in parking lot one', () => {
+
+                    parkingLotOne.occupied = 10;
+                    parkingLotTwo.occupied = 9;
+                    parkingLotTwo.addCar(car);
+
+                    let result = parkingBoy.park(car);
+
+                    expect(result).toEqual('fail');
+                });
+            });
+        });
+    });
+
+    describe('Leave:', () => {
+        describe('Can Leave', () => {
+
+            it('car in parking lot one, the car can leave from parking lot one', () => {
+
+                parkingBoy.park(car);
+                let result = parkingBoy.leave(car, parkingLotOne);
+                expect(result).toEqual('success');
+            });
+        });
+
+        describe('Can Not Leave', () => {
+
+            it('All parking lot have not the car', () => {
+                let result = parkingBoy.leave(car, parkingLotOne);
+                expect(result).toEqual('fail');
+            });
+
+            it('Not in given parking lot', () => {
+                parkingBoy.park(car);
+                let result = parkingBoy.leave(car, parkingLotTwo);
+                expect(result).toEqual('other parking lot');
+            });
+
+            it('Just now drive by the master of the car', () => {
+                parkingBoy.park(car);
+                parkingBoy.leave(car, parkingLotOne);
+                let result = parkingBoy.leave(car, parkingLotOne);
+                expect(result).toEqual('fail');
             });
         });
     });

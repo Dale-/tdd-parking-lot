@@ -8,7 +8,7 @@ export default class ParkingBoy {
 
     findParkingSpace() {
         let parkingLots = this.parkingLots;
-        for (var index in parkingLots) {
+        for (let index in parkingLots) {
             if (parkingLots[index].isAvailable()) {
                 return parkingLots[index];
             }
@@ -22,16 +22,31 @@ export default class ParkingBoy {
             parkingLot.addCar(car);
             return 'success';
         }
-        return 'false';
+        return 'fail';
     }
 
     leave(car, parkingLot) {
-        parkingLot.removeCar(car);
-        return 'success';
+        if (parkingLot.findCar(car)) {
+            parkingLot.removeCar(car);
+            return 'success';
+        } else if (this.findParkingLot(car)) {
+            return 'other parking lot';
+        }
+        return 'fail';
     }
 
     static findCarByParkingLot(car, parkingLot) {
         return parkingLot.findCar(car);
+    }
+
+    findParkingLot(car) {
+        let parkingLots = this.parkingLots;
+        for (let index in parkingLots) {
+            if (ParkingBoy.findCarByParkingLot(car, parkingLots[index])) {
+                return parkingLots[index];
+            }
+        }
+        return false;
     }
 
 
